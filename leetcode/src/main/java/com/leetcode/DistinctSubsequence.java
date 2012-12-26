@@ -34,7 +34,7 @@ public class DistinctSubsequence {
     }
 
     private void initializeMatrix(int[][] M,int x, int y){
-        for(int i=0; i < )
+//        for(int i=0; i < )
     }
 
     private void dynamicNumDistinct(String S, String T,int[][] M){
