@@ -11,15 +11,22 @@ import java.util.*;
  */
 public class MinimumWindowSubstring {
 
+    // A stack-like behavior to track the what characters are left
     List<Character> charList;
+    // A map of the position to characters. Makes it easy to pop out the first item
     Map<Integer,Character> posCharMap;
+    // A set for fast verification of whether the character is present in input and store positions
+    Map<Character,PriorityQueue<Integer>> charPosMap;
+
     int minWindowSize;
     int windowPos[];
-    Set<Character> charSet;
+
 
     public String minWindow(String S, String T) {
         // Start typing your Java solution below
         // DO NOT write main() function
+        if (T.length() > S.length())
+            return "";
         minWindowSize = Integer.MAX_VALUE;
         windowPos = new int[]{-1,-1};
         posCharMap= new TreeMap<Integer, Character>();
@@ -34,10 +41,10 @@ public class MinimumWindowSubstring {
 
     private void convertTtoList(String T){
         charList = new ArrayList<Character>();
-        charSet = new HashSet<Character>();
+        charPosMap = new HashMap<Character, PriorityQueue<Integer>>();
         for(char c : T.toCharArray()){
             charList.add(c);
-            charSet.add(c);
+            charPosMap.put(c,new PriorityQueue<Integer>());
         }
     }
 
@@ -45,13 +52,15 @@ public class MinimumWindowSubstring {
     private void findWindow(String S){
         for(int i=0; i < S.length(); i++){
             Character c = S.charAt(i);
-           if(charSet.contains(c)){
+           if(charPosMap.containsKey(c)){
                 if(charList.contains(c)){
                     charList.remove(c);
                 }else{
-                    removeCharFromMap(c);
+                    int lastPos = charPosMap.get(c).poll();
+                    posCharMap.remove(lastPos);
                 }
                 posCharMap.put(i,c);
+                charPosMap.get(c).add(i);
 
                if(charList.isEmpty()){
                    updateWindowSize(c);
@@ -72,16 +81,6 @@ public class MinimumWindowSubstring {
             windowPos[1] = lastPos;
         }
         charList.add(posCharMap.remove(startPos));
-    }
-
-
-    private void removeCharFromMap(Character c){
-        for(Map.Entry entry : posCharMap.entrySet()){
-            if(entry.getValue() == c){
-                posCharMap.remove(entry.getKey());
-                return;
-            }
-        }
     }
 
 }
