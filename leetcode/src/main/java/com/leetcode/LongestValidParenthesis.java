@@ -1,6 +1,7 @@
 package com.leetcode;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -14,13 +15,14 @@ public class LongestValidParenthesis {
 
     List<ParenCount> list;
     ParenCount pc;
+    int maxRightParenCount;
+    int currentRightParenCount;
 
     public int longestValidParentheses(String s) {
         list = new ArrayList<ParenCount>();
         pc = new ParenCount();
         coundAndAddParensToList(s);
-        int rightParenCount = getMaxRightParens(list);
-        return rightParenCount * 2;
+        return maxRightParenCount * 2;
     }
 
 
@@ -33,34 +35,38 @@ public class LongestValidParenthesis {
             }
             if(pc.rightParen > pc.leftParen){
                 pc.rightParen--;
-                if(pc.leftParen == 0){
-                    continue;
-                }
-                else{
-                    list.add(pc);
-                    pc = new ParenCount();
-                }
+                updateMaxParenCount(list);
+                continue;
+            }
+            if(pc.leftParen > 0 && pc.rightParen == pc.leftParen){
+                list.add(pc);
+                pc = new ParenCount();
             }
         }
-        list.add(pc);
-    }
-
-    private int countAllRightParens(List<ParenCount> list){
-        int totalRightParenCount = 0;
-        for(ParenCount pcObj : list){
-            totalRightParenCount+= pcObj.rightParen;
+        if(pc.leftParen > 0){
+            list.add(pc);
         }
-        return totalRightParenCount;
+        updateMaxParenCount(list);
     }
 
-    private int getMaxRightParens(List<ParenCount> list){
-        int maxRightParenCount = 0;
-        for(ParenCount pcObj : list){
-            if(pcObj.rightParen > maxRightParenCount){
-                maxRightParenCount = pcObj.rightParen;
+    private void updateMaxParenCount(List<ParenCount> list){
+        Iterator<ParenCount> it = list.iterator();
+        while(it.hasNext()){
+            ParenCount pcObj = it.next();
+            if(pcObj.rightParen != pcObj.leftParen){
+                currentRightParenCount = pcObj.rightParen;
+            }else{
+                currentRightParenCount+=pcObj.rightParen;
             }
+            it.remove();
+
+            if(currentRightParenCount > maxRightParenCount){
+                maxRightParenCount = currentRightParenCount;
+            }
+
         }
-        return maxRightParenCount;
+
+        currentRightParenCount = 0;
     }
 
 
