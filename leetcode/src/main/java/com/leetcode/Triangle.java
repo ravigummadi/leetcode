@@ -15,23 +15,25 @@ public class Triangle {
     public int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
         int minSum = 0;
         int currentIndex = 0;
-        for(List<Integer> list : triangle){
-            currentIndex = getSmallestNeighbour(list,currentIndex);
-            minSum += list.get(currentIndex);
-        }
-        return minSum;
+        return recursiveMinTotal(triangle,0,0,0);
+
     }
 
-    private int getSmallestNeighbour(List<Integer> list, int index){
-        int leftNeighbour = list.get(index);
-        int rightNeighbour = Integer.MAX_VALUE;
-        if(index+1 < list.size()){
-            rightNeighbour = list.get(index+1);
+
+    private int recursiveMinTotal(ArrayList<ArrayList<Integer>> triangle, int currentList, int currentIndex, int currentSum){
+        if(currentList >= triangle.size()){
+            return currentSum;
         }
 
-        int smallest = Math.min(Math.abs(0-leftNeighbour),Math.abs(0-rightNeighbour));
-        if(smallest == leftNeighbour){return index;}
-        else return index+1;
+        try{
+            return Math.min(
+                    recursiveMinTotal(triangle,currentList+1,currentIndex,currentSum+triangle.get(currentList).get(currentIndex)),
+                    recursiveMinTotal(triangle,currentList+1,currentIndex+1,currentSum+triangle.get(currentList).get(currentIndex+1))
+            );
+        }catch(IndexOutOfBoundsException ioe){
+            return recursiveMinTotal(triangle,currentList+1,currentIndex,currentSum+triangle.get(currentList).get(currentIndex));
+        }
+
     }
 
 }
