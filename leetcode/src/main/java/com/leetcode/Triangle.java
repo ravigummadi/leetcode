@@ -1,7 +1,9 @@
 package com.leetcode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,10 +14,12 @@ import java.util.List;
  */
 public class Triangle {
 
+
     public int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
         int minSum = 0;
         int currentIndex = 0;
         return recursiveMinTotal(triangle,0,0,0);
+
 
     }
 

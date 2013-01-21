@@ -4,6 +4,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,12 +16,20 @@ import java.util.ArrayList;
 public class TriangleTest {
     @Test
     public void testTriangleTest(){
+
         Triangle tr = new Triangle();
         ArrayList<ArrayList<Integer>> triangle = new ArrayList<ArrayList<Integer>>();
-        ArrayList<Integer> list1 = new ArrayList<Integer>();
-        list1.add(-10);
+        ArrayList<Integer> list1 = new ArrayList<Integer>(Arrays.asList(2));
+        ArrayList<Integer> list2 = new ArrayList<Integer>(Arrays.asList(3,4));
+        ArrayList<Integer> list3 = new ArrayList<Integer>(Arrays.asList(6,5,9));
+        ArrayList<Integer> list4 = new ArrayList<Integer>(Arrays.asList(4,4,8,0));
+
         triangle.add(list1);
-        Assert.assertEquals(-10,tr.minimumTotal(triangle));
+        triangle.add(list2);
+        triangle.add(list3);
+        triangle.add(list4);
+        Assert.assertEquals(14,tr.minimumTotal(triangle));
+
     }
 
 
