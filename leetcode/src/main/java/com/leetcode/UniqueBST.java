@@ -8,7 +8,12 @@ import java.util.List;
  * User: ravigummadi
  * Date: 12/30/12
  * Time: 8:12 AM
- * To change this template use File | Settings | File Templates.
+ *
+ Unique Binary Search Trees
+ Given n, how many structurally unique BST's (binary search trees) that store values 1...n?
+
+ For example,
+ Given n = 3, there are a total of 5 unique BST's.
  */
 public class UniqueBST {
 
@@ -16,52 +21,35 @@ public class UniqueBST {
     int totalCount;
 
     public int numTrees(int n) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
         totalCount = 0;
         initList(n);
-        for(int i=0; i < numbers.size(); i++){
-            int current = numbers.remove(i);
-            Node node = new Node();
-            node.data = current;
-            recursiveBuildTree(node,0,n);
-            numbers.add(i,new Integer(current));
-        }
+        recursiveSubTree(numbers);
         return totalCount;
     }
 
-    private void recursiveBuildTree(Node node, int low, int high){
-        if(numbers.isEmpty()){
-            printTree();
-            totalCount++;
+
+    private void recursiveSubTree(List<Integer> smallList){
+        if(smallList.size()==1){
+            if(numbers.isEmpty()){
+                totalCount++;
+            }
             return;
         }
-        for(int i=0; i < numbers.size(); i++){
-            int current = numbers.remove(i);
-            if(current >= low && current <= high){
-                if(current < node.data){
-                    node.left = new Node();
-                    node.left.data = current;
-                    recursiveBuildTree(node.left,low,node.data);
-                    node.left = null;
-                }else if(current >= node.data){
-                    node.right = new Node();
-                    node.right.data = current;
-                    recursiveBuildTree(node.right,node.data,high);
-                    node.right = null;
-                }
-                numbers.add(i,new Integer(current));
-            }else{
-                numbers.add(i,new Integer(current));
-                return;
+        for(int i=0; i < smallList.size(); i++){
+            int current = smallList.get(i);
+            numbers.remove(i);
+            if (i-1 >= 0){
+                List<Integer> leftSubList = new ArrayList<Integer>(smallList.subList(0,i-1));
+                recursiveSubTree(leftSubList);
             }
+
+            if(i+1 < smallList.size()){
+                List<Integer> rightSubList = new ArrayList<Integer>(smallList.subList(i+1,smallList.size()));
+                recursiveSubTree(rightSubList);
+            }
+//            numbers.add(i,new Integer(current));
         }
     }
-
-    private void printTree(){
-
-    }
-
 
     private void initList(int n){
         numbers = new ArrayList<Integer>();
