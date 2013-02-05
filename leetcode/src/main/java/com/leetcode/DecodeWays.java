@@ -43,9 +43,5 @@ public class DecodeWays {
 
     }
 
-    private void recNumDecoding(String s){
-        
-    }
-
 }
 
