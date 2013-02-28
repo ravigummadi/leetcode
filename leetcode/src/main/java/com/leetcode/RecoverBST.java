@@ -9,33 +9,64 @@ package com.leetcode;
  */
 public class RecoverBST {
 
+    NodePair first;
+    NodePair second;
+    TreeNode previous;
+
     public void recoverTree(TreeNode root) {
-        recursiveRecover(root);
+        first = null;
+        second = null;
+        previous = null;
+        inorderTraversal(root);
+        swapNodes(first,second);
     }
 
-    private void recursiveRecover(TreeNode node){
-        if(node == null)
+    private void inorderTraversal(TreeNode current){
+        if(current == null){
             return;
-        if(node.left != null && node.left.val > node.val){
-            if(node.right == null || (node.right != null && node.left.val < node.right.val)){
-                swapValues(node.left, node);
-                return;
-            }
         }
-        if(node.right != null && node.right.val < node.val){
-            if(node.left == null || (node.left != null && node.right.val > node.left.val)){
-                swapValues(node.right, node);
-                return;
-            }
-        }
-        recursiveRecover(node.left);
-        recursiveRecover(node.right);
+        inorderTraversal(current.left);
+        visit(current);
+        inorderTraversal(current.right);
     }
 
-    private void swapValues(TreeNode node1, TreeNode node2){
-        int temp = node1.val;
-        node1.val = node2.val;
-        node2.val = temp;
+
+    private void visit(TreeNode current){
+        if(previous != null){
+            if(previous.val < current.val){
+                if(first == null){
+                    first = new NodePair();
+                    first.first = previous;
+                    first.second = current;
+                }else{
+                    second = new NodePair();
+                    second.first = previous;
+                    second.second = current;
+                }
+            }
+        }
+        previous = current;
     }
 
+    private void swapNodes(NodePair first, NodePair second){
+       if(first == null){
+           return;
+       }else{
+           if(second == null){
+               int temp = first.first.val;
+               first.first.val = first.second.val;
+               first.second.val = temp;
+           }else{
+               int temp = first.first.val;
+               first.first.val = second.second.val;
+               second.second.val = temp;
+           }
+       }
+    }
+
+
+    class NodePair{
+        TreeNode first;
+        TreeNode second;
+    }
 }
