@@ -10,7 +10,7 @@ package com.leetcode;
 public class LongestPalindromIterative {
 
     public String longestPalindrome(String s) {
-        
+        return null;
     }
 
 }

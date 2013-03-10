@@ -15,7 +15,7 @@ public class LongestPalindromTest {
     @Test
     public void testPalindrome(){
         LongestPalindrome palindrome = new LongestPalindrome();
-        Assert.assertEquals("abcba",palindrome.longestPalindrome("abcdeabcbaaaa23aa"));
+        Assert.assertEquals("abcba",palindrome.recLongestPalindrome("abcdeabcbaaaa23aa"));
     }
 
 }
