@@ -27,17 +27,8 @@ public class InsertInterval {
             }else if(result == 1){
                 resultSet.add(current);
             }else{
-                if(isSubset(newInterval, current)){
-                    resultSet.add(current);
-                    addRemainingToList(resultSet,intervals);
-                    return resultSet;
-                }else if(isSubset(current, newInterval)){
-                    continue;
-                }else if(isStartOverlapping(newInterval, current)){
-                    newInterval = new Interval(current.start, newInterval.end);
-                }else if(isEndOverlapping(newInterval, current)){
-                    newInterval = new Interval(newInterval.start, current.end);
-                }
+                // Super awesome trick stolen from Di!
+                newInterval = new Interval(Math.min(current.start, newInterval.start), Math.max(current.end, newInterval.end));
             }
         }
         resultSet.add(newInterval);
