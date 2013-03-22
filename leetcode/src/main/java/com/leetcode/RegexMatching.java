@@ -13,53 +13,9 @@ public class RegexMatching {
         return isRecursiveMatch(s,p,'!');
     }
 
-
     private boolean isRecursiveMatch(String s, String p, char prevChar){
-
-        if(p == null || p.length()==0){
-            if(s == null || s.length() == 0){
-                return true;
-            }else{
-                return false;
-            }
-        }
-
-        if(s == null || s.length() == 0){
-            if(p.length() == 1 && p.charAt(0) == '*'){
-                return true;
-            }else{
-                return false;
-            }
-        }
-
-        if(s.equals(p)){
-            return true;
-        }
-
-
-        if(p.charAt(0) == '.'){
-            return isRecursiveMatch(s.substring(1),p.substring(1),p.charAt(0));
-        }
-
-        if(p.charAt(0) == '*'){
-            if(prevChar == '.' || s.charAt(0) == prevChar){
-                return isRecursiveMatch(s.substring(1),p,prevChar) ||
-                        isRecursiveMatch(s.substring(1),p.substring(1),prevChar);
-            }else{
-                return isRecursiveMatch(s,p.substring(1),p.charAt(0));
-            }
-        }
-
-        if(s.charAt(0) != p.charAt(0)){
-            if(!isNextChar(p,'*')){
-                return false;
-            }else{
-                return isRecursiveMatch(s,p.substring(2),p.charAt(1));
-            }
-        }else{
-            return isRecursiveMatch(s.substring(1),p.substring(1),p.charAt(0));
-        }
-
+        if(s.equals(p)) return true;
+        return false;
     }
 
 
