@@ -35,29 +35,6 @@ public class InsertInterval {
         return resultSet;
     }
 
-    private boolean isStartOverlapping(Interval first, Interval second){
-        if(first.start >= second.start && first.start <= second.end){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    private boolean isEndOverlapping(Interval first, Interval second){
-        if(first.end >= second.start && first.end <= second.end){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    private boolean isSubset(Interval first, Interval second){
-        if(first.start >= second.start && first.end <= second.end){
-            return true;
-        }else
-            return false;
-    }
-
     private void addRemainingToList(ArrayList<Interval> resultSet, ArrayList<Interval> original){
         for(Interval interval : original){
             resultSet.add(interval);
