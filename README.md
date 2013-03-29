@@ -13,7 +13,7 @@ Leet Code (www.leetcode.com/onlinejudge)
 ## Popular Problems
 
 
-### To come up with a solution
+## To come up with a solution
 1. Reverse Nodes K
 2. Substring Concat of All words
 3. Next Permutation
