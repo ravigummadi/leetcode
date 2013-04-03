@@ -6,6 +6,7 @@ Leet Code (www.leetcode.com/onlinejudge)
 2. Regex matching
 3. Container with most water
 1. Next Permutation
+1. Sudoku Solver (Simple backtracking takes long time to implement perfectly)
 
 ## Moderate Problems (~1 hour to solve)
 1. Reverse Nodes K
