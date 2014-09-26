@@ -16,7 +16,8 @@ public class Permutations {
 
     private <T> void recursivePrintPermutations(List<T> soFar, List<T> restOfList){
         if(restOfList.isEmpty()){
-            System.out.println(printList(soFar));
+            System.out.println(CommonUtils.printList(soFar));
+            return;
         }
 
         for(int i=0; i < restOfList.size(); i++){
@@ -27,12 +28,6 @@ public class Permutations {
             soFar.remove(lastObj);
             restOfList.add(i, lastObj);
         }
-    }
-
-    private <T> String printList(List<T> printList){
-        StringBuilder sb = new StringBuilder();
-        printList.stream().forEach(obj -> sb.append(obj));
-        return sb.toString();
     }
 
 
