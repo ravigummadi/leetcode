@@ -1,5 +1,7 @@
 package com.general;
 
+import com.common.CommonUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,18 +11,18 @@ import java.util.List;
 public class Permutations {
 
     // Prints the permutations of a generic list
-    public <T> void printPermutations(List<T> typedList){
+    public <T> void printPermutations(List<T> typedList) {
         List<T> soFarList = new ArrayList<T>();
         recursivePrintPermutations(soFarList, typedList);
     }
 
-    private <T> void recursivePrintPermutations(List<T> soFar, List<T> restOfList){
-        if(restOfList.isEmpty()){
+    private <T> void recursivePrintPermutations(List<T> soFar, List<T> restOfList) {
+        if (restOfList.isEmpty()) {
             System.out.println(CommonUtils.printList(soFar));
             return;
         }
 
-        for(int i=0; i < restOfList.size(); i++){
+        for (int i = 0; i < restOfList.size(); i++) {
             T lastObj = restOfList.get(i);
             soFar.add(lastObj);
             restOfList.remove(i);

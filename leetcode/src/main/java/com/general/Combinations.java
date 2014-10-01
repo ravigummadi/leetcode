@@ -1,5 +1,7 @@
 package com.general;
 
+import com.common.CommonUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +10,13 @@ import java.util.List;
  */
 public class Combinations {
 
-    public <T> void printCombinations(List<T> typedList){
+    public <T> void printCombinations(List<T> typedList) {
         List<T> sofar = new ArrayList<>();
         recursivePrintCombinations(sofar, typedList);
     }
 
-    private <T> void recursivePrintCombinations(List<T> soFar, List<T> left){
-        if(left.isEmpty()) {
+    private <T> void recursivePrintCombinations(List<T> soFar, List<T> left) {
+        if (left.isEmpty()) {
             System.out.println(CommonUtils.printList(soFar));
             return;
         }

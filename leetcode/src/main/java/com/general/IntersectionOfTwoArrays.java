@@ -12,18 +12,18 @@ import java.util.List;
  */
 public class IntersectionOfTwoArrays {
 
-    public Integer[] printIntersection(int[] arr1, int[] arr2){
+    public Integer[] printIntersection(int[] arr1, int[] arr2) {
         List<Integer> intersectList = new ArrayList<Integer>();
-        int i=0;
-        int j=0;
-        while(i < arr1.length && j < arr2.length){
-            if(arr1[i] == arr2[j]){
+        int i = 0;
+        int j = 0;
+        while (i < arr1.length && j < arr2.length) {
+            if (arr1[i] == arr2[j]) {
                 intersectList.add(arr1[i]);
                 i++;
                 j++;
-            }else if(arr1[i] < arr2[j]){
+            } else if (arr1[i] < arr2[j]) {
                 i++;
-            }else{
+            } else {
                 j++;
             }
         }

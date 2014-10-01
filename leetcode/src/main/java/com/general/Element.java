@@ -60,21 +60,22 @@ class ThreadElement extends Thread {
     private Element element;
     private ThreadType threadType;
 
-    public ThreadElement(Element element, ThreadType threadType){
+    public ThreadElement(Element element, ThreadType threadType) {
         this.element = element;
         this.threadType = threadType;
     }
+
     @Override
     public void run() {
-        if(threadType == ThreadType.H){
+        if (threadType == ThreadType.H) {
             System.out.println("Thread: " + Thread.currentThread().getName() + " H");
             try {
                 element.H();
             } catch (InterruptedException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
-        }else if(threadType == ThreadType.O){
-            System.out.println("Thread: "+Thread.currentThread().getName()+" O");
+        } else if (threadType == ThreadType.O) {
+            System.out.println("Thread: " + Thread.currentThread().getName() + " O");
             try {
                 element.O();
             } catch (InterruptedException e) {
