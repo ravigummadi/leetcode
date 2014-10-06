@@ -152,13 +152,13 @@ public class LinkedListOperations {
         return head;
     }
 
-    public static ListNode[] moveNode(ListNode head1, ListNode head2){
-        if(head2 != null) {
-            ListNode head2Copy = head2;
-            head2 = head2.next;
-            head1 = insertAtHead(head1, head2Copy);
+    public static ListNode[] moveNode(ListNode source, ListNode destination){
+        if(destination != null) {
+            ListNode destinationCopy = destination;
+            destination = destination.next;
+            source = insertAtHead(source, destinationCopy);
         }
-        return new ListNode[]{head1, head2};
+        return new ListNode[]{source, destination};
     }
 
     public static ListNode[] alternatingSplit(ListNode head){
@@ -186,19 +186,84 @@ public class LinkedListOperations {
         if(head1 == null) return head2;
         if(head2 == null) return head1;
 
-        ListNode newHead = null;
+        ListNode newHead = new ListNode(-100);
+        ListNode currentNewHead = newHead;
         ListNode currentHead1 = head1;
         ListNode currentHead2 = head2;
         while(currentHead1 != null && currentHead2 != null){
             if(currentHead1.val < currentHead2.val){
-                ListNode[] updatedNodes = moveNode(newHead, currentHead1);
-                newHead =
+                ListNode ch1Next = currentHead1.next;
+                currentNewHead = insertAfterNode(currentNewHead, currentHead1);
+                currentHead1 = ch1Next;
+            }else{
+                ListNode ch2next = currentHead2.next;
+                currentNewHead = insertAfterNode(currentNewHead, currentHead2);
+                currentHead2 = ch2next;
             }
+            currentNewHead = currentNewHead.next;
         }
 
-
+        if(currentHead1 == null) {
+            currentNewHead.next = currentHead2;
+        }else {
+            currentNewHead.next = currentHead1;
+        }
+        return newHead.next;
     }
 
+    public static ListNode mergeSort(ListNode head){
+        if(head == null || head.next == null) return head;
+
+        ListNode[] twoLists = frontBackSplit2(head);
+        twoLists[0] = mergeSort(twoLists[0]);
+        twoLists[1] = mergeSort(twoLists[1]);
+        return sortedMerge(twoLists[0],twoLists[1]);
+    }
+
+    public static ListNode sortedIntersect(ListNode head1, ListNode head2){
+        ListNode intersectHead = new ListNode(-999);
+
+        ListNode currentIntersectNode = intersectHead;
+        ListNode currentHead1 = head1;
+        ListNode currentHead2 = head2;
+        int lastValInserted = -999;
+
+        while(currentHead1 != null && currentHead2 != null){
+            if(currentHead1.val < currentHead2.val)
+                currentHead1 = currentHead1.next;
+            else if(currentHead2.val < currentHead1.val)
+                currentHead2 = currentHead2.next;
+            else{
+                if(lastValInserted != currentHead1.val) {
+                    currentIntersectNode = insertAfterNode(currentIntersectNode, currentHead1.val);
+                    currentIntersectNode = currentIntersectNode.next;
+                    lastValInserted = currentHead1.val;
+                }
+                currentHead1 = currentHead1.next;
+                currentHead2 = currentHead2.next;
+            }
+        }
+        return intersectHead.next;
+    }
+
+    public static ListNode reverseLinkedList(ListNode head){
+        ListNode newHead = null;
+        ListNode current = head;
+        while(current != null){
+            ListNode currentNext = current.next;
+            newHead = insertAtHead(newHead, current);
+            current = currentNext;
+        }
+        return newHead;
+    }
+
+    public static ListNode recursiveReverseLinkedList(ListNode head){
+        if(head == null || head.next == null) return head;
+        ListNode newHead = recursiveReverseLinkedList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+    }
 
 
     public static ListNode insertAfterNode(ListNode currentNode, ListNode newNode){
