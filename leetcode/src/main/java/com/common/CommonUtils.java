@@ -14,10 +14,10 @@ public class CommonUtils {
         return sb.toString();
     }
 
-    public static ListNode getRandomLinkedList(){
+    public static ListNode getRandomLinkedList(int length){
         ListNode head = new ListNode(0);
         ListNode current = head;
-        for(int i=1; i < 5; i++){
+        for(int i=1; i < length; i++){
             Random rand = new Random();
             current.next = new ListNode(rand.nextInt(9));
             current = current.next;
