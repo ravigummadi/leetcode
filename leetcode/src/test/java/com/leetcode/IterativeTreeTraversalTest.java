@@ -1,5 +1,6 @@
 package com.leetcode;
 
+import com.common.TreeNode;
 import junit.framework.Assert;
 import org.junit.Test;
 

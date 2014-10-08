@@ -1,5 +1,7 @@
 package com.leetcode;
 
+import com.common.TreeNode;
+
 /**
  * Created with IntelliJ IDEA.
  * User: gummadi
