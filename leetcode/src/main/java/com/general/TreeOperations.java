@@ -32,6 +32,48 @@ public class TreeOperations {
         return left;
     }
 
+   /* Facebook interview phone question and answer
+
+
+   void flattenBinaryTreeToLL(TreeNode head){
+    }
+
+
+   Tuple<TreeNode, TreeNode> recursiveFlattenBinaryTreeToLL(TreeNode tNode){
+
+        if(tNode == null || (tNode.left == null && tNode.right == null))
+            return new Tuple(tNode, tNode);
+
+        Tuple leftFlattneedTree;
+        Tuple rightFlattneedTree;
+
+        if(tNode.left ! = null){
+            leftFlattenedTree = recursiveFlattenBinaryTreeToLL(tNode.left);
+            leftFlattenedTree.second = tNode;
+        }
+
+        if(tNode.right != null){
+            rightFlattenedTree = recursiveFlattenBinaryTreeToLL(tNode.right);
+            tNode.right = rightFlattenedTree.first;
+        }
+
+        if(tNode.left != null){
+            firstNode = leftFlattenedTree.first
+        }else{
+            firstNode = tNode;
+        }
+
+        if(tNode.right != null){
+            secondNode = rightFlattened.last
+        }else{
+            secondNode = tNode;
+        }
+
+        return new Tuple(firstNode, secondNode);
+
+    }*/
+
+
 
 
 }
